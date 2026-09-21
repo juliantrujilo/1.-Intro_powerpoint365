@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historia de PowerPoint | SENA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ppt: #c0392b;
+  --ppt-claro: #e74c3c;
+  --ppt-oscuro: #922b21;
+  --sena-verde: #39a900;
+  --sena-naranja: #ff6b00;
+  --texto: #1a1a2e;
+  --texto-dim: #4a5568;
+  --texto-dimmer: #718096;
+  --bg: #f8fafc;
+  --borde: #e2e8f0;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; color:var(--texto); background:var(--bg); line-height:1.6; overflow-x:hidden; }
+
+/* TOPBAR */
+.topbar {
+  position:sticky; top:0; z-index:100;
+  background:rgba(255,255,255,0.96); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--borde); padding:12px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05); flex-wrap:wrap; gap:10px;
+}
+.topbar-left { display:flex; align-items:center; gap:12px; }
+.sena-logo { background:var(--sena-verde); color:#fff; font-weight:900; font-size:15px; padding:6px 13px; border-radius:8px; letter-spacing:1px; }
+.topbar-brand { font-family:'Syne',sans-serif; font-size:13px; font-weight:700; }
+.topbar-sub { font-size:11px; color:var(--texto-dimmer); margin-top:1px; }
+.topbar-nav { display:flex; gap:16px; flex-wrap:wrap; }
+.topbar-nav a { text-decoration:none; font-size:12px; font-weight:600; color:var(--texto-dimmer); transition:color .2s; white-space:nowrap; }
+.topbar-nav a:hover { color:var(--ppt); }
+
+/* HERO */
+.hero {
+  background:linear-gradient(135deg,#1a0000 0%,#3d0c0c 40%,#6b1a1a 75%,#8b2323 100%);
+  padding:72px 20px 60px; text-align:center; position:relative; overflow:hidden;
+}
+.hero::before { content:''; position:absolute; width:600px; height:600px; background:var(--ppt); border-radius:50%; top:-300px; left:-150px; opacity:0.15; filter:blur(90px); }
+.hero::after { content:''; position:absolute; width:400px; height:400px; background:#ff8c00; border-radius:50%; bottom:-200px; right:-100px; opacity:0.10; filter:blur(80px); }
+.hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(192,57,43,0.2); border:1px solid rgba(231,76,60,0.4); color:#f5a9a0; padding:7px 20px; border-radius:30px; font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:24px; position:relative; z-index:1; }
+.hero-icon { font-size:clamp(48px,8vw,80px); margin-bottom:16px; position:relative; z-index:1; display:block; filter:drop-shadow(0 8px 24px rgba(192,57,43,0.5)); }
+.hero h1 { font-family:'Syne',sans-serif; font-size:clamp(32px,7vw,64px); font-weight:800; color:#fff; line-height:1.1; margin-bottom:16px; position:relative; z-index:1; }
+.hero h1 em { font-style:normal; background:linear-gradient(135deg,#f5a9a0,#e74c3c); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-desc { font-size:clamp(14px,2.2vw,18px); color:rgba(255,255,255,0.72); max-width:600px; margin:0 auto 36px; position:relative; z-index:1; }
+
+/* STATS HERO */
+.hero-stats { display:flex; justify-content:center; gap:28px; flex-wrap:wrap; position:relative; z-index:1; }
+.hstat { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.13); border-radius:16px; padding:16px 28px; text-align:center; backdrop-filter:blur(8px); }
+.hstat-num { font-family:'Syne',sans-serif; font-size:30px; font-weight:800; color:#fff; display:block; }
+.hstat-label { font-size:12px; color:rgba(255,255,255,0.6); font-weight:500; }
+
+/* SECCIÓN GENÉRICA */
+.section { max-width:1040px; margin:0 auto; padding:60px 20px; }
+.section-tag { display:inline-flex; align-items:center; gap:8px; background:rgba(192,57,43,0.08); border:1px solid rgba(192,57,43,0.2); color:var(--ppt); padding:6px 16px; border-radius:20px; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; }
+.section h2 { font-family:'Syne',sans-serif; font-size:clamp(24px,4vw,38px); font-weight:800; color:var(--texto); margin-bottom:12px; }
+.section h2 span { color:var(--ppt); }
+.section-intro { font-size:clamp(14px,1.8vw,17px); color:var(--texto-dim); max-width:700px; margin-bottom:40px; line-height:1.7; }
+
+/* CARD FUNDADORES */
+.founders-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; margin-bottom:40px; }
+.founder-card {
+  background:#fff; border:2px solid var(--borde); border-radius:20px;
+  padding:28px; position:relative; overflow:hidden;
+  transition:transform .2s, box-shadow .2s;
+}
+.founder-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(192,57,43,0.12); }
+.founder-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--ppt),var(--ppt-claro)); }
+.founder-avatar { font-size:52px; margin-bottom:16px; display:block; }
+.founder-name { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--texto); margin-bottom:4px; }
+.founder-role { font-size:12px; font-weight:700; color:var(--ppt); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; }
+.founder-desc { font-size:14px; color:var(--texto-dim); line-height:1.6; }
+
+/* TIMELINE */
+.timeline { position:relative; padding-left:32px; }
+.timeline::before { content:''; position:absolute; left:10px; top:0; bottom:0; width:2px; background:linear-gradient(180deg,var(--ppt),rgba(192,57,43,0.1)); }
+.titem { position:relative; margin-bottom:36px; }
+.titem::before { content:''; position:absolute; left:-28px; top:6px; width:14px; height:14px; background:var(--ppt); border-radius:50%; border:3px solid #fff; box-shadow:0 0 0 2px var(--ppt); }
+.titem-year { display:inline-flex; align-items:center; background:var(--ppt); color:#fff; padding:3px 12px; border-radius:20px; font-size:12px; font-weight:800; margin-bottom:8px; letter-spacing:1px; }
+.titem-title { font-family:'Syne',sans-serif; font-size:18px; font-weight:800; color:var(--texto); margin-bottom:6px; }
+.titem-desc { font-size:14px; color:var(--texto-dim); line-height:1.6; }
+.titem-highlight { display:inline-flex; align-items:center; gap:6px; background:rgba(192,57,43,0.06); border:1px solid rgba(192,57,43,0.15); color:var(--ppt); padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600; margin-top:8px; }
+
+/* VERSIONES GRID */
+.versions-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; }
+.version-card {
+  background:#fff; border:2px solid var(--borde); border-radius:16px;
+  padding:20px; text-align:center; transition:all .2s;
+  cursor:default;
+}
+.version-card:hover { border-color:var(--ppt); transform:translateY(-2px); box-shadow:0 8px 20px rgba(192,57,43,0.1); }
+.version-card.actual { border-color:var(--ppt); background:linear-gradient(135deg,rgba(192,57,43,0.04),#fff); }
+.v-year { font-size:11px; font-weight:700; color:var(--texto-dimmer); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+.v-name { font-family:'Syne',sans-serif; font-size:17px; font-weight:800; color:var(--texto); margin-bottom:8px; }
+.v-desc { font-size:12px; color:var(--texto-dim); line-height:1.5; }
+.v-badge { display:inline-block; background:var(--ppt); color:#fff; font-size:10px; font-weight:700; padding:2px 10px; border-radius:20px; margin-top:8px; letter-spacing:1px; }
+
+/* FEATURES GRID */
+.features-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px; }
+.feat-card {
+  background:#fff; border:2px solid var(--borde); border-radius:18px;
+  padding:24px; display:flex; gap:16px; align-items:flex-start;
+  transition:all .2s;
+}
+.feat-card:hover { border-color:var(--ppt); box-shadow:0 6px 20px rgba(192,57,43,0.08); }
+.feat-icon { font-size:32px; flex-shrink:0; }
+.feat-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:800; color:var(--texto); margin-bottom:5px; }
+.feat-desc { font-size:13px; color:var(--texto-dim); line-height:1.5; }
+
+/* DATO CURIOSO */
+.dato-box {
+  background:linear-gradient(135deg,rgba(192,57,43,0.07),rgba(231,76,60,0.03));
+  border:2px solid rgba(192,57,43,0.18);
+  border-radius:20px; padding:28px 32px;
+  display:flex; gap:18px; align-items:flex-start; margin-bottom:24px;
+}
+.dato-icon { font-size:36px; flex-shrink:0; }
+.dato-title { font-family:'Syne',sans-serif; font-size:17px; font-weight:800; color:var(--ppt); margin-bottom:6px; }
+.dato-text { font-size:14px; color:var(--texto-dim); line-height:1.6; }
+.dato-text strong { color:var(--texto); }
+
+/* SEPARADOR */
+.sep { height:2px; background:linear-gradient(90deg,transparent,var(--borde),transparent); margin:0; }
+
+/* AGENDA DEL DÍA */
+.agenda-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; }
+.agenda-card {
+  background:#fff; border:2px solid var(--borde); border-radius:18px;
+  padding:22px; position:relative; overflow:hidden;
+}
+.agenda-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--ac-color); }
+.agenda-num { font-family:'Syne',sans-serif; font-size:32px; font-weight:800; color:var(--ac-color); opacity:0.15; position:absolute; top:10px; right:14px; }
+.agenda-hora { font-size:12px; font-weight:700; color:var(--ac-color); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+.agenda-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:800; color:var(--texto); margin-bottom:4px; }
+.agenda-desc { font-size:12px; color:var(--texto-dim); line-height:1.5; }
+
+/* FOOTER */
+footer { background:var(--texto); text-align:center; padding:28px; font-size:12px; color:rgba(255,255,255,0.55); line-height:2; margin-top:60px; }
+footer span { color:#fff; font-weight:700; }
+
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity .55s ease,transform .55s ease; }
+.reveal.in { opacity:1; transform:translateY(0); }
+.reveal-delay-1 { transition-delay:.1s; }
+.reveal-delay-2 { transition-delay:.2s; }
+.reveal-delay-3 { transition-delay:.3s; }
+
+/* BG ALTERNADO */
+.bg-alt { background:#fff; }
+
+@media(max-width:640px){
+  .topbar { flex-direction:column; align-items:flex-start; }
+  .hero-stats { gap:12px; }
+  .dato-box { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <div class="topbar-left">
+    <div class="sena-logo">SENA</div>
+    <div>
+      <div class="topbar-brand">Prevención y Control Ambiental · Sesión PowerPoint</div>
+      <div class="topbar-sub">CADP del Huila · Ficha 3410069</div>
+    </div>
+  </div>
+  <div class="topbar-nav">
+    <a href="#origen">Origen</a>
+    <a href="#fundadores">Fundadores</a>
+    <a href="#evolucion">Evolución</a>
+    <a href="#versiones">Versiones</a>
+    <a href="#hoy">PPT Hoy</a>
+    <a href="#agenda">Agenda</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">📅 Sesión de hoy · 8 horas</div>
+  <span class="hero-icon">📊</span>
+  <h1>Conoce<br><em>PowerPoint</em></h1>
+  <p class="hero-desc">La herramienta de presentaciones más usada del mundo. Hoy aprenderás su historia, su evolución y cómo dominarla desde cero.</p>
+  <div class="hero-stats">
+    <div class="hstat"><span class="hstat-num">35+</span><span class="hstat-label">Años de historia</span></div>
+    <div class="hstat"><span class="hstat-num">500M</span><span class="hstat-label">Usuarios activos</span></div>
+    <div class="hstat"><span class="hstat-num">30M</span><span class="hstat-label">Presentaciones/día</span></div>
+    <div class="hstat"><span class="hstat-num">1987</span><span class="hstat-label">Año de nacimiento</span></div>
+  </div>
+</div>
+
+<!-- ORIGEN -->
+<div class="section" id="origen">
+  <div class="section-tag">🌱 El comienzo</div>
+  <h2>¿Por qué se <span>inventó</span> PowerPoint?</h2>
+  <p class="section-intro reveal">A finales de los años 80, comunicar ideas en reuniones de negocios era complicado: se usaban transparencias de acetato dibujadas a mano o impresas en costosas impresoras especiales. La necesidad de simplificar este proceso dio vida a una de las herramientas más influyentes de la historia.</p>
+
+  <div class="dato-box reveal">
+    <span class="dato-icon">💡</span>
+    <div>
+      <div class="dato-title">El problema que resolvió PowerPoint</div>
+      <div class="dato-text">En 1987, los profesionales necesitaban <strong>horas o días</strong> para preparar una presentación visual. Había que diseñar manualmente cada transparencia, llevarla a imprimir y rezar para que no se rompiera antes de la reunión. PowerPoint nació para <strong>democratizar la comunicación visual</strong> y poner ese poder en manos de cualquier persona con una computadora.</div>
+    </div>
+  </div>
+
+  <div class="dato-box reveal">
+    <span class="dato-icon">🎯</span>
+    <div>
+      <div class="dato-title">El nombre "PowerPoint"</div>
+      <div class="dato-text">El nombre fue propuesto por <strong>Robert Gaskins</strong>, uno de sus creadores. Significa literalmente <strong>"Punto de poder"</strong> — la idea de darle poder a quien presenta para comunicar con impacto visual. El nombre original interno del proyecto era <em>"Presenter"</em>, pero finalmente se eligió PowerPoint por ser más memorable.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- FUNDADORES -->
+<div class="section bg-alt" id="fundadores">
+  <div class="section-tag">👥 Las personas detrás</div>
+  <h2>Los <span>fundadores</span> de PowerPoint</h2>
+  <p class="section-intro reveal">Dos personas con visiones complementarias crearon la herramienta que cambiaría para siempre la manera en que el mundo presenta sus ideas.</p>
+
+  <div class="founders-grid">
+    <div class="founder-card reveal">
+      <span class="founder-avatar">👨‍💼</span>
+      <div class="founder-name">Robert Gaskins</div>
+      <div class="founder-role">Visionario del producto</div>
+      <div class="founder-desc">Trabajaba en la empresa <strong>Forethought Inc.</strong> cuando concibió la idea de PowerPoint. Tenía claro el problema: preparar presentaciones visuales era demasiado difícil. Gaskins diseñó el concepto del producto, definió cómo debía funcionar y qué problema debía resolver. Era el estratega.</div>
+    </div>
+    <div class="founder-card reveal reveal-delay-1">
+      <span class="founder-avatar">👨‍💻</span>
+      <div class="founder-name">Dennis Austin</div>
+      <div class="founder-role">Arquitecto de software</div>
+      <div class="founder-desc">El ingeniero que convirtió la visión de Gaskins en código real. Austin fue quien programó las primeras versiones de PowerPoint, resolviendo los enormes desafíos técnicos de crear una aplicación gráfica en las computadoras de los años 80. Sin él, la idea jamás habría funcionado.</div>
+    </div>
+    <div class="founder-card reveal reveal-delay-2">
+      <span class="founder-avatar">🏢</span>
+      <div class="founder-name">Forethought Inc.</div>
+      <div class="founder-role">La empresa creadora · 1983–1987</div>
+      <div class="founder-desc">Pequeña empresa de software de Silicon Valley que apostó por el concepto. Solo cuatro años después de su fundación, su mayor creación — PowerPoint — llamaría la atención de un gigante tecnológico que cambiaría el destino del programa para siempre.</div>
+    </div>
+  </div>
+
+  <div class="dato-box reveal">
+    <span class="dato-icon">💰</span>
+    <div>
+      <div class="dato-title">La compra que cambió todo — julio de 1987</div>
+      <div class="dato-text">Solo <strong>3 meses después</strong> de que PowerPoint 1.0 saliera al mercado, <strong>Microsoft</strong> compró Forethought Inc. por <strong>14 millones de dólares</strong>. Fue la primera adquisición de software de Microsoft en su historia. Bill Gates vio el potencial inmediatamente. Desde ese día, PowerPoint pasó a ser parte del ecosistema Microsoft para siempre.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- EVOLUCIÓN TIMELINE -->
+<div class="section" id="evolucion">
+  <div class="section-tag">📅 A través del tiempo</div>
+  <h2>La <span>evolución</span> de PowerPoint</h2>
+  <p class="section-intro reveal">Desde un programa en blanco y negro para Mac, hasta la plataforma colaborativa en la nube que usamos hoy. Un viaje de más de 35 años.</p>
+
+  <div class="timeline">
+    <div class="titem reveal">
+      <span class="titem-year">1987</span>
+      <div class="titem-title">PowerPoint 1.0 — El nacimiento 🐣</div>
+      <div class="titem-desc">Solo disponible para <strong>Apple Macintosh</strong>. Las presentaciones eran únicamente en <strong>blanco y negro</strong> — literalmente, solo podías crear transparencias en escala de grises para proyectar en acetato. Aún así, revolucionó la forma de presentar ideas.</div>
+      <span class="titem-highlight">Solo Mac · Solo B&N · Transparencias de acetato</span>
+    </div>
+    <div class="titem reveal">
+      <span class="titem-year">1990</span>
+      <div class="titem-title">PowerPoint 2.0 — Llega el color 🎨</div>
+      <div class="titem-desc">Por primera vez disponible para <strong>Windows</strong>. Se añadió soporte para <strong>diapositivas a color</strong>. Las presentaciones podían ahora imprimirse a color e incluso proyectarse con los nuevos proyectores que empezaban a aparecer en las salas de reuniones.</div>
+      <span class="titem-highlight">Llega a Windows · Color · Proyección real</span>
+    </div>
+    <div class="titem reveal">
+      <span class="titem-year">1993</span>
+      <div class="titem-title">PowerPoint 4.0 — Primera versión masiva 💼</div>
+      <div class="titem-desc">Se convierte en el <strong>estándar de la industria</strong>. Se integra al paquete <strong>Microsoft Office</strong> por primera vez, junto a Word y Excel. Las empresas de todo el mundo lo adoptan. Las reuniones empresariales ya no son lo mismo.</div>
+      <span class="titem-highlight">Llega a Office · Estándar empresarial global</span>
+    </div>
+    <div class="titem reveal">
+      <span class="titem-year">1997</span>
+      <div class="titem-title">PowerPoint 97 — Animaciones 🎬</div>
+      <div class="titem-desc">Se añaden las <strong>animaciones de objetos</strong> y las <strong>transiciones entre diapositivas</strong>. Por primera vez las presentaciones podían moverse, aparecer y desaparecer. También se introduce el <strong>panel de notas del orador</strong>. Las presentaciones se vuelven dinámicas.</div>
+      <span class="titem-highlight">Animaciones · Transiciones · Notas del orador</span>
+    </div>
+    <div class="titem reveal">
+      <span class="titem-year">2007</span>
+      <div class="titem-title">PowerPoint 2007 — La revolución visual 🚀</div>
+      <div class="titem-desc">Rediseño completo de la interfaz con la <strong>Cinta de opciones (Ribbon)</strong> que aún usamos hoy. Se introduce el formato <strong>.pptx</strong> (XML comprimido) que reemplaza el antiguo .ppt. SmartArt, nuevos temas y efectos visuales modernos hacen que las presentaciones luzcan más profesionales.</div>
+      <span class="titem-highlight">Ribbon · Formato .pptx · SmartArt · Nuevos temas</span>
+    </div>
+    <div class="titem reveal">
+      <span class="titem-year">2013</span>
+      <div class="titem-title">PowerPoint 2013 — La nube llega ☁️</div>
+      <div class="titem-desc">Primera integración real con <strong>OneDrive</strong>. La <strong>Vista del presentador mejorada</strong> permite ver las notas y el tiempo en la pantalla del portátil mientras el público ve solo las diapositivas. Se añaden vídeos online directamente desde la presentación.</div>
+      <span class="titem-highlight">OneDrive · Vista presentador mejorada · Video online</span>
+    </div>
+    <div class="titem reveal">
+      <span class="titem-year">2019</span>
+      <div class="titem-title">PowerPoint 2019 — Inteligencia Artificial 🤖</div>
+      <div class="titem-desc">Llega <strong>PowerPoint Designer</strong> (IA que sugiere diseños automáticamente), <strong>Morphing</strong> (transición fluida entre diapositivas), texto en 3D, y <strong>subtítulos en tiempo real</strong> durante la presentación en múltiples idiomas.</div>
+      <span class="titem-highlight">IA Designer · Morph · Subtítulos automáticos</span>
+    </div>
+    <div class="titem reveal">
+      <span class="titem-year">2021–Hoy</span>
+      <div class="titem-title">PowerPoint 365 — Colaboración en tiempo real 🌐</div>
+      <div class="titem-desc">La versión actual. Múltiples personas pueden <strong>editar la misma presentación simultáneamente</strong> desde cualquier parte del mundo. <strong>Copilot IA</strong> genera presentaciones completas desde un prompt. Funciona en navegador, app de escritorio y móvil. Siempre actualizado.</div>
+      <span class="titem-highlight">Coedición · Copilot IA · Multiplataforma · Siempre actualizado</span>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- VERSIONES -->
+<div class="section bg-alt" id="versiones">
+  <div class="section-tag">📦 Todas las versiones</div>
+  <h2>Las <span>versiones</span> de PowerPoint</h2>
+  <p class="section-intro reveal">Desde 1987 hasta hoy, cada versión agregó algo nuevo. Conoce el recorrido completo.</p>
+
+  <div class="versions-grid">
+    <div class="version-card reveal"><div class="v-year">1987</div><div class="v-name">PPT 1.0</div><div class="v-desc">Solo Mac · Solo blanco y negro</div></div>
+    <div class="version-card reveal reveal-delay-1"><div class="v-year">1988</div><div class="v-name">PPT 2.0</div><div class="v-desc">Mac color · Primeros gráficos</div></div>
+    <div class="version-card reveal reveal-delay-2"><div class="v-year">1990</div><div class="v-name">PPT 3.0</div><div class="v-desc">Llega a Windows · Color real</div></div>
+    <div class="version-card reveal"><div class="v-year">1993</div><div class="v-name">PPT 4.0</div><div class="v-desc">Entra al paquete Office</div></div>
+    <div class="version-card reveal reveal-delay-1"><div class="v-year">1997</div><div class="v-name">PPT 97</div><div class="v-desc">Animaciones y transiciones</div></div>
+    <div class="version-card reveal reveal-delay-2"><div class="v-year">2000</div><div class="v-name">PPT 2000</div><div class="v-desc">Web y HTML export</div></div>
+    <div class="version-card reveal"><div class="v-year">2003</div><div class="v-name">PPT 2003</div><div class="v-desc">Panel de tareas · más temas</div></div>
+    <div class="version-card reveal reveal-delay-1"><div class="v-year">2007</div><div class="v-name">PPT 2007</div><div class="v-desc">Ribbon · .pptx · SmartArt</div></div>
+    <div class="version-card reveal reveal-delay-2"><div class="v-year">2010</div><div class="v-name">PPT 2010</div><div class="v-desc">Video integrado · Secciones</div></div>
+    <div class="version-card reveal"><div class="v-year">2013</div><div class="v-name">PPT 2013</div><div class="v-desc">OneDrive · Vista presentador</div></div>
+    <div class="version-card reveal reveal-delay-1"><div class="v-year">2016</div><div class="v-name">PPT 2016</div><div class="v-desc">Coautoría · Ink · Morph</div></div>
+    <div class="version-card reveal reveal-delay-2"><div class="v-year">2019</div><div class="v-name">PPT 2019</div><div class="v-desc">IA Designer · 3D · Subtítulos</div></div>
+    <div class="version-card actual reveal"><div class="v-year">2021 – HOY</div><div class="v-name">PPT 365</div><div class="v-desc">Copilot IA · Coedición real · Siempre actualizado</div><div class="v-badge">✨ VERSIÓN ACTUAL</div></div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- PPT HOY -->
+<div class="section" id="hoy">
+  <div class="section-tag">⚡ PowerPoint 365</div>
+  <h2>PowerPoint <span>hoy</span> — ¿Qué puede hacer?</h2>
+  <p class="section-intro reveal">La versión actual de PowerPoint 365 es una plataforma completa de comunicación visual. Estas son sus capacidades más importantes que veremos en la sesión de hoy.</p>
+
+  <div class="features-grid">
+    <div class="feat-card reveal">
+      <span class="feat-icon">🎨</span>
+      <div>
+        <div class="feat-title">Diseño con IA (Designer)</div>
+        <div class="feat-desc">PowerPoint sugiere diseños profesionales automáticamente mientras escribes. Solo agregas el contenido y la IA lo organiza visualmente.</div>
+      </div>
+    </div>
+    <div class="feat-card reveal reveal-delay-1">
+      <span class="feat-icon">🔄</span>
+      <div>
+        <div class="feat-title">Transición Morph</div>
+        <div class="feat-desc">Crea animaciones fluidas y cinematográficas entre diapositivas moviendo objetos de una posición a otra automáticamente.</div>
+      </div>
+    </div>
+    <div class="feat-card reveal reveal-delay-2">
+      <span class="feat-icon">👥</span>
+      <div>
+        <div class="feat-title">Coedición en tiempo real</div>
+        <div class="feat-desc">Varios aprendices pueden editar la misma presentación al mismo tiempo desde diferentes computadoras, como Google Slides.</div>
+      </div>
+    </div>
+    <div class="feat-card reveal">
+      <span class="feat-icon">🎤</span>
+      <div>
+        <div class="feat-title">Vista del Presentador</div>
+        <div class="feat-desc">Ves tus notas, la diapositiva actual, la siguiente y el tiempo. El público solo ve la presentación limpia en el proyector.</div>
+      </div>
+    </div>
+    <div class="feat-card reveal reveal-delay-1">
+      <span class="feat-icon">📱</span>
+      <div>
+        <div class="feat-title">Multiplataforma</div>
+        <div class="feat-desc">Funciona en Windows, Mac, navegador web y teléfono móvil. Puedes empezar en el computador y continuar desde el celular.</div>
+      </div>
+    </div>
+    <div class="feat-card reveal reveal-delay-2">
+      <span class="feat-icon">🎬</span>
+      <div>
+        <div class="feat-title">Grabación y exportar a video</div>
+        <div class="feat-desc">Puedes grabar tu voz y cámara sobre las diapositivas y exportar la presentación como video .mp4 para compartir sin PowerPoint.</div>
+      </div>
+    </div>
+    <div class="feat-card reveal">
+      <span class="feat-icon">📝</span>
+      <div>
+        <div class="feat-title">Subtítulos automáticos</div>
+        <div class="feat-desc">Durante la presentación, genera subtítulos en tiempo real de lo que el presentador habla, en más de 60 idiomas distintos.</div>
+      </div>
+    </div>
+    <div class="feat-card reveal reveal-delay-1">
+      <span class="feat-icon">🤖</span>
+      <div>
+        <div class="feat-title">Copilot (IA generativa)</div>
+        <div class="feat-desc">La nueva IA de Microsoft genera presentaciones completas desde una descripción de texto. Escribe el tema y Copilot crea las diapositivas.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dato-box reveal" style="margin-top:32px;">
+    <span class="dato-icon">📊</span>
+    <div>
+      <div class="dato-title">Un dato que sorprende</div>
+      <div class="dato-text">Se calcula que cada día se realizan <strong>más de 30 millones de presentaciones de PowerPoint</strong> en el mundo. Esto equivale a <strong>347 presentaciones por segundo</strong>. PowerPoint está tan integrado en la cultura empresarial y educativa que muchas personas no imaginan una reunión o clase sin él.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- AGENDA DEL DÍA -->
+<div class="section bg-alt" id="agenda">
+  <div class="section-tag">📅 Plan de hoy</div>
+  <h2>Agenda de la <span>sesión</span></h2>
+  <p class="section-intro reveal">Esta es la hoja de ruta para la jornada de hoy. 8 horas de aprendizaje práctico divididas en bloques.</p>
+
+  <div class="agenda-grid">
+    <div class="agenda-card reveal" style="--ac-color:#c0392b;">
+      <div class="agenda-num">1</div>
+      <div class="agenda-hora">8:00 – 9:30 am</div>
+      <div class="agenda-title">Intro a PowerPoint</div>
+      <div class="agenda-desc">Historia, fundadores, evolución y características actuales de PowerPoint 365</div>
+    </div>
+    <div class="agenda-card reveal reveal-delay-1" style="--ac-color:#8b5cf6;">
+      <div class="agenda-num">2</div>
+      <div class="agenda-hora">9:30 – 11:30 am</div>
+      <div class="agenda-title">Grupos PowerPoint 365</div>
+      <div class="agenda-desc">Exploración guiada de las pestañas y grupos de herramientas de PowerPoint</div>
+    </div>
+    <div class="agenda-card reveal reveal-delay-2" style="--ac-color:#e67e22;">
+      <div class="agenda-num">3</div>
+      <div class="agenda-hora">11:30 – 12:00 m</div>
+      <div class="agenda-title">Cierre mañana</div>
+      <div class="agenda-desc">Exposición de grupos, preguntas y receso del mediodía</div>
+    </div>
+    <div class="agenda-card reveal" style="--ac-color:#27ae60;">
+      <div class="agenda-num">4</div>
+      <div class="agenda-hora">2:00 – 3:30 pm</div>
+      <div class="agenda-title">Atajos PowerPoint 365</div>
+      <div class="agenda-desc">Dominio de atajos de teclado para aumentar la productividad en PPT</div>
+    </div>
+    <div class="agenda-card reveal reveal-delay-1" style="--ac-color:#2b579a;">
+      <div class="agenda-num">5</div>
+      <div class="agenda-hora">3:30 – 5:30 pm</div>
+      <div class="agenda-title">Actividad Final Grupal</div>
+      <div class="agenda-desc">Creación y exposición de presentación clínica en grupos de 2–3 personas</div>
+    </div>
+    <div class="agenda-card reveal reveal-delay-2" style="--ac-color:#c0392b;">
+      <div class="agenda-num">6</div>
+      <div class="agenda-hora">5:30 – 6:00 pm</div>
+      <div class="agenda-title">Evaluación y cierre</div>
+      <div class="agenda-desc">Retroalimentación, evaluación de la jornada y compromisos</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Prevención y Control Ambiental · <span>Sesión 2 · PowerPoint 365</span></p>
+  <p>Centro Agroempresarial y Desarrollo Pecuario del Huila · <span>SENA</span></p>
+  <p>Instructor: <span>Julián Andrés Trujillo Morales</span> · Ficha <span>3410069</span></p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold:0.06 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if(t) t.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+</script>
+</body>
+</html>
